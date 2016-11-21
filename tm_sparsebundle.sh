@@ -48,6 +48,10 @@ create() {
 	DIR="${1%%/}"
 	SIZE="${2}"
 	OVERWRITE="${3}"
+	if [ ! -d "${DIR}" ]; then
+		echo "Destination directory '${DIR}' does not exist." >&2
+		exit 1
+	fi
 	HOST=`hostname -s`
 	if [ "${USE_MAC}" ]; then
 		MAC=`ifconfig en0 | awk '$1 ~ /^ether$/ { gsub(/:/, "", $2); print $2; }'`
