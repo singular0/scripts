@@ -100,7 +100,7 @@ end
 $options = {}
 
 optparser = OptionParser.new do |opts|
-  opts.banner = "Usage: itunes_clean_files.rb [-c] [-d] [-v ] [-l library] path ..."
+  opts.banner = "Usage: itunes_clean_files.rb [-c] [-d] [-v] [-l library] path ..."
   $options[:libfile] = File.join(ENV["HOME"], "Music/iTunes/iTunes Music Library.xml")
   opts.on("-l", "--library LIBRARY", "iTunes Music Library.xml location override") do |file|
     $options[:libfile] = file
