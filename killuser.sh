@@ -1,5 +1,7 @@
 #!/bin/sh
 
+echo Killing loginwindow...
+
 ps -U "$1" -xww -o pid,user,command \
   | sed "1,1d" \
   | grep "loginwindow" \
@@ -7,6 +9,8 @@ ps -U "$1" -xww -o pid,user,command \
   | xargs -n 1 sudo kill -9
 
 sleep 20
+
+echo Killing remaining processes...
 
 ps -U "$1" -xww -o pid,user,command \
   | sed "1,1d" \
