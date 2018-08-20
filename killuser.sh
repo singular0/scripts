@@ -1,15 +1,15 @@
 #!/bin/sh
 
-ps -auxww -U $1 \
-| grep -E "loginwindow" \
-| tr -s ' ' \
-| cut -d ' ' -f 2 \
-| xargs -n 1 sudo kill -KILL
+ps -U "$1" -xww -o pid,user,command \
+  | sed "1,1d" \
+  | grep "loginwindow" \
+  | awk "{ print \$1 }" \
+  | xargs -n 1 sudo kill -9
 
 sleep 20
 
-ps -auxww -U $1 \
-| sed '1,1d' \
-| tr -s ' ' \
-| cut -d ' ' -f 2 \
-| xargs -n 1 sudo kill -KILL
+ps -U "$1" -xww -o pid,user,command \
+  | sed "1,1d" \
+  | awk "{ print \$1 }" \
+  | xargs -n 1 sudo kill -9
+
